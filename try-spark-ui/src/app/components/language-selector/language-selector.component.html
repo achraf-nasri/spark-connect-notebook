@@ -1,0 +1,7 @@
+<mat-form-field appearance="fill" class="full-width">
+    <mat-label>Select Language</mat-label>
+    <mat-select [(value)]="selectedLanguage" (selectionChange)="emitLanguage()">
+        <mat-option value="python">🐍 Python</mat-option>
+        <mat-option value="sql">📄 SQL</mat-option>
+    </mat-select>
+</mat-form-field>

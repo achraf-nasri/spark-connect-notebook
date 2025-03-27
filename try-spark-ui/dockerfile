@@ -1,0 +1,20 @@
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Copy package files and install dependencies first (cache-friendly)
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the source code
+COPY . .
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Expose Angular dev server port
+EXPOSE 4200
+
+# Start the Angular development server
+CMD ["ng", "serve", "--host", "0.0.0.0"]

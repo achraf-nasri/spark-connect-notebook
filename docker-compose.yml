@@ -1,0 +1,75 @@
+services:
+  # Spark Master, Workers and Connect
+  spark-master:
+    image: bitnami/spark:latest
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_HOST=spark-master
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    volumes:
+      - ./sample-data:/data
+
+  spark-worker-1:
+    image: bitnami/spark:latest
+    container_name: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./sample-data:/data
+
+  spark-worker-2:
+    image: bitnami/spark:latest
+    container_name: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./sample-data:/data
+
+  spark-connect:
+    image: bitnami/spark:latest
+    container_name: spark-connect
+    environment:
+      - SPARK_MODE=driver
+      - SPARK_MASTER=spark://spark-master:7077
+    ports:
+      - "15002:15002"
+      - "4040:4040"
+    depends_on:
+      - spark-master
+    command: ["/bin/bash", "-c", "/opt/bitnami/spark/sbin/start-connect-server.sh --master spark://spark-master:7077 --packages org.apache.spark:spark-connect_2.12:3.5.1"]
+    volumes:
+      - ./sample-data:/data
+      - ./jars_dir:/opt/bitnami/spark/ivy:z
+
+
+# Frontend - Angular App
+  try-spark-ui:
+    build:
+      context: ./try-spark-ui
+    container_name: try-spark-ui
+    networks:
+      - app-network
+    ports:
+      - "4200:4200"
+
+  # Backend - FastAPI
+  try-spark-api:
+    build:
+      context: ./try-spark-api
+    container_name: try-spark-api
+    networks:
+      - app-network
+    ports:
+      - "8000:8000"
+    depends_on:
+      - spark-connect
+  
+networks:
+  app-network:

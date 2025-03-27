@@ -1,0 +1,44 @@
+<mat-toolbar [color]="isDarkTheme ? 'primary' : 'accent'">
+  <span>⚡ Spark Connect Notebook</span>
+  <span class="toolbar-spacer"></span>
+
+  <a
+  mat-button
+  color="primary"
+  href="http://localhost:4040/jobs/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <mat-icon>open_in_new</mat-icon>
+  Spark UI
+</a>
+  
+  <button mat-button (click)="toggleTheme()">
+    {{ isDarkTheme ? '☀ Light Mode' : '🌙 Dark Mode' }}
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card class="sandbox-card full-width">
+    <mat-card-title>Run Your Code</mat-card-title>
+    <mat-card-content class="content-area">
+
+      <div class="spacer"></div>
+
+      <app-language-selector (languageChange)="setLanguage($event)"></app-language-selector>
+      <app-code-editor
+        [codeInput]="codeInput"
+        [language]="selectedLanguage"
+        [theme]="editorTheme"
+        (codeChange)="setCode($event)">
+      </app-code-editor>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="runCode()">▶ Run Code</button>
+      </div>
+
+      <app-result-pane [result]="resultOutput"></app-result-pane>
+
+    </mat-card-content>
+  </mat-card>
+</div>

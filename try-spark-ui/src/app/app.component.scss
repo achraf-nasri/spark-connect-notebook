@@ -1,0 +1,77 @@
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  .full-width {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .sandbox-card {
+    padding: 1rem;
+  }
+  
+  .content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .spacer {
+    height: 1rem;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .result-card {
+    background-color: #1e1e1e;
+    color: #00ff00;
+  }
+  
+  .result-output {
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+  
+  mat-toolbar button {
+    white-space: nowrap;
+    min-width: 100px;
+  }
+  
+  @media (max-width: 768px) {
+    .sandbox-card {
+      padding: 0.5rem;
+    }
+  
+    .content-area {
+      gap: 1rem;
+    }
+  
+    .button-container {
+      justify-content: center;
+    }
+  
+    .result-output {
+      font-size: 0.8rem;
+    }
+  
+    mat-toolbar button {
+      min-width: 80px;
+      font-size: 0.8rem;
+      padding: 0 8px;
+    }
+  }
+  
