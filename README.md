@@ -30,7 +30,7 @@ cd spark-connect-notebook
 ### 2. Launch the full stack
 
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
 This will start the following services:
