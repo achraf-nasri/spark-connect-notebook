@@ -3,6 +3,9 @@
 A minimal, Dockerized setup to execute **PySpark** and **SQL** code remotely on a Spark cluster using **Spark Connect**.  
 Includes a simple backend API and frontend UI to interact with Spark like a remote notebook.
 
+![UI Screenshot](./notebook-ui-screenshot.png)
+
+![SPARK CONNECT UI Screenshot](./spark-connect-ui-screenshot.png)
 ---
 
 ## ✨ Features
